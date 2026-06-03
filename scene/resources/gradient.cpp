@@ -74,7 +74,7 @@ void Gradient::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_interpolation_color_space"), &Gradient::get_interpolation_color_space);
 
 	ADD_GROUP("Interpolation", "interpolation_");
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "interpolation_mode", PROPERTY_HINT_ENUM, "Linear,Constant,Cubic"), "set_interpolation_mode", "get_interpolation_mode");
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "interpolation_mode", PROPERTY_HINT_ENUM, "Linear,Constant,Cubic,Ease"), "set_interpolation_mode", "get_interpolation_mode");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "interpolation_color_space", PROPERTY_HINT_ENUM, "sRGB,Linear sRGB,Oklab"), "set_interpolation_color_space", "get_interpolation_color_space");
 
 	ADD_GROUP("Raw Data", "");
@@ -84,6 +84,7 @@ void Gradient::_bind_methods() {
 	BIND_ENUM_CONSTANT(GRADIENT_INTERPOLATE_LINEAR);
 	BIND_ENUM_CONSTANT(GRADIENT_INTERPOLATE_CONSTANT);
 	BIND_ENUM_CONSTANT(GRADIENT_INTERPOLATE_CUBIC);
+	BIND_ENUM_CONSTANT(GRADIENT_INTERPOLATE_EASE);
 
 	BIND_ENUM_CONSTANT(GRADIENT_COLOR_SPACE_SRGB);
 	BIND_ENUM_CONSTANT(GRADIENT_COLOR_SPACE_LINEAR_SRGB);

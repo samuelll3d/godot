@@ -43,6 +43,7 @@ public:
 		GRADIENT_INTERPOLATE_LINEAR,
 		GRADIENT_INTERPOLATE_CONSTANT,
 		GRADIENT_INTERPOLATE_CUBIC,
+		GRADIENT_INTERPOLATE_EASE,
 	};
 
 	enum ColorSpace {
@@ -228,6 +229,22 @@ public:
 				interpolated[1] = Math::cubic_interpolate(color1[1], color2[1], color0[1], color3[1], weight);
 				interpolated[2] = Math::cubic_interpolate(color1[2], color2[2], color0[2], color3[2], weight);
 				interpolated[3] = Math::cubic_interpolate(color1[3], color2[3], color0[3], color3[3], weight);
+
+				return inv_transform_color_space(interpolated);
+			}
+			case GRADIENT_INTERPOLATE_EASE: {
+				Color color1 = transform_color_space(point1.color);
+				Color color2 = transform_color_space(point2.color);
+
+				const float weight2 = weight * weight;
+				weight = 3.0f * weight2 - 2.0f * weight2 * weight;
+				const float mweight = 1.0f - weight;
+
+				Color interpolated;
+				interpolated[0] = mweight * color1[0] + weight * color2[0];
+				interpolated[1] = mweight * color1[1] + weight * color2[1];
+				interpolated[2] = mweight * color1[2] + weight * color2[2];
+				interpolated[3] = mweight * color1[3] + weight * color2[3];
 
 				return inv_transform_color_space(interpolated);
 			}
